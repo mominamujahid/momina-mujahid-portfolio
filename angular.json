@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "skinalyze-fyp": {
+    "portfolio-angular": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,9 +13,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/skinalyze-fyp",
+            "outputPath": "dist/portfolio-angular",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            
             "polyfills": [
               "zone.js"
             ],
@@ -25,18 +25,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/custom-theme.scss",
-              "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/styles.css"
             ],
-            "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -48,8 +39,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "12kb",
-                  "maximumError": "12kb"
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
                 }
               ],
               "outputHashing": "all"
@@ -69,19 +60,13 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "skinalyze-fyp:build:production"
+              "buildTarget": "portfolio-angular:build:production"
             },
             "development": {
-              "buildTarget": "skinalyze-fyp:build:development"
+              "buildTarget": "portfolio-angular:build:development"
             }
           },
           "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "skinalyze-fyp:build"
-          }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
@@ -105,6 +90,6 @@
     }
   },
   "cli": {
-    "analytics": "756302d2-e34f-416c-bcbf-41513c605165"
+    "analytics": "8293e60a-da91-4c18-83c0-b6e5fd27a080"
   }
 }

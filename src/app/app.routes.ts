@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SignupComponent } from './signup/signup.component';
@@ -66,3 +67,26 @@ export const routes: Routes = [
     provideHttpClient(withFetch()) ,ProfileService],// Enable fetch API for HttpClient],
 })
 export class AppRoutingModule {}
+=======
+
+
+import {  Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { ResumeComponent } from './pages/resume/resume.component';
+import { PortfolioComponent } from './pages/portfolio/portfolio.component';
+import { ServicesComponent } from './pages/services/services.component';
+import { ContactComponent } from './pages/contact/contact.component';
+
+
+export const routes: Routes = [  
+{ path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'resume', component: ResumeComponent },
+  { path: 'portfolio', component: PortfolioComponent },
+  { path: 'services', component: ServicesComponent },
+  { path: 'contact', component: ContactComponent },
+];
+
+
+>>>>>>> 2c8a7784cb0f46b2d9354c9a12d751db40e8dccf

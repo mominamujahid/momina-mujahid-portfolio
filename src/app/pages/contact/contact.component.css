@@ -1,0 +1,37 @@
+.contact-section {
+  padding: 40px;
+  text-align: center;
+
+  .contact-info {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .contact-item {
+    background-color: #12032c;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    min-width: 280px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .contact-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .contact-item a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .contact-item a:hover {
+    text-decoration: underline;
+  }
+}
+

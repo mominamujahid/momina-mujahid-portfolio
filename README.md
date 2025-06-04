@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # SkinalyzeFyp
+=======
+# PortfolioAngular
+>>>>>>> 2c8a7784cb0f46b2d9354c9a12d751db40e8dccf
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
 

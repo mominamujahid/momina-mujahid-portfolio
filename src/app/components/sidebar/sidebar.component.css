@@ -1,0 +1,74 @@
+.sidebar {
+  width: 260px;
+  background-color: #12032c;
+  color: white;
+  height: 93.5vh;
+  padding: 20px;
+  text-align: center;
+
+  /* Avatar */
+  .avatar {
+    width: 120px;
+    height: 120px; /* Keep original size */
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    margin: 10px 0;
+    font-size: 22px;
+  }
+
+  .social-links a {
+    margin: 0 5px;
+    color: #ccc;
+    font-size: 18px;
+  }
+
+  nav a {
+    display: block;
+    color: #bbb;
+    padding: 12px 0;
+    text-align: left;
+    text-decoration: none;
+    i {
+      margin-right: 10px;
+    }
+
+    &.active {
+      color: #00bfff;
+    }
+  }
+
+  /* Responsive Design (Mobile View) */
+  @media screen and (max-width: 768px) {
+    width: 100%; /* Sidebar becomes full-width on smaller screens */
+    height: auto; /* Flexible height */
+    padding: 10px; /* Less padding for mobile */
+    
+    .avatar {
+      width: 100px; /* Slightly smaller avatar on mobile */
+      height: 100px;
+    }
+    
+    h2 {
+      font-size: 20px; /* Adjust heading size on mobile */
+    }
+    
+    nav a {
+      padding: 10px 0; /* Adjust padding on nav items */
+    }
+  }
+
+  /* Extra Small Devices (Mobile Phones) */
+  @media screen and (max-width: 480px) {
+    .social-links a {
+      font-size: 16px; /* Smaller icons */
+    }
+
+    nav a {
+      font-size: 14px; /* Smaller text for nav links */
+    }
+  }
+}
