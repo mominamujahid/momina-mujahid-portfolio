@@ -1,0 +1,243 @@
+/* General Styles */
+
+/* General Styles */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(to right, #fcf8f3, #e9d8cf);
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Notification Inside Login Box */
+.login-box {
+  width: 400px; /* Responsive width */
+  background: white;
+  padding: 35px; /* Reduced padding for mobile */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(209, 70, 70, 0.2);
+  text-align: center;
+
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Heading */
+.login-box h2 {
+  background: linear-gradient(45deg, #c0842f, #6a4f70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+/* Form Styles */
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 0.95em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #8ecae6;
+  border-radius: 8px;
+  font-size: 1em;
+  outline: none;
+  transition: 0.1s;
+}
+
+.form-group input:focus {
+  border-color: #005b96;
+  box-shadow: 0 0 8px rgba(0, 91, 150, 0.3);
+}
+
+/* Error Messages */
+.error-message {
+  color: red;
+  font-size: 0.85em;
+  margin-top: 5px;
+}
+
+/* Notification Style (inside the login box) */
+.notification {
+  padding: 15px 25px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+  margin: 10px auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.notification.error {
+  background-color: #ff6b6b;
+  color: white;
+  border-left: 6px solid #d9534f;
+}
+
+.notification.success {
+  background-color: #775b6c;
+  color: white;
+  border-left: 6px solid #e6adbe;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Login Button */
+.login-button {
+  color: #fff;
+  background: linear-gradient(135deg, #8b3a62, #c56c91);
+  padding: 12px;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #7a3157, #b65a83);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Disabled Button */
+.login-button:disabled {
+  background: #5c3a52;
+  cursor: not-allowed;
+}
+
+/* Forgot Password Link */
+.forgot-password a,
+p a {
+  color: #005b96;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.eye-icon {
+  font-size: 18px;
+  color: #555;
+  cursor: pointer;
+  user-select: none;
+}
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Alert Messages */
+.alert {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Large Decorative Circles on Full Page */
+.login-wrapper::before,
+.login-wrapper::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.login-wrapper::before {
+  width: 45vw;
+  height: 35vw;
+  background: #945d96;
+  top: -15vw;
+  left: -15vw;
+}
+
+.login-wrapper::after {
+  width: 45vw;
+  height: 45vw;
+  background: #613042;
+  bottom: -20vw;
+  right: -20vw;
+}
+
+/* --------------------- RESPONSIVE DESIGN --------------------- */
+
+/* Adjust login box and fonts for small screens */
+@media (max-width: 480px) {
+  .login-box {
+    padding: 15px; /* Reduce padding */
+  }
+
+  .login-box h2 {
+    font-size: 1.5em; /* Reduce heading size */
+  }
+
+  .form-group input,
+  .login-button {
+    font-size: 0.9em; /* Smaller font size */
+    padding: 10px; /* Adjust padding */
+  }
+}
+
+/* Adjust Decorative Circles for Smaller Screens */
+@media (max-width: 768px) {
+  .login-wrapper::before {
+    width: 25vw;
+    height: 25vw;
+    top: -10vw;
+    left: -10vw;
+  }
+
+  .login-wrapper::after {
+    width: 30vw;
+    height: 30vw;
+    bottom: -15vw;
+    right: -15vw;
+  }
+}

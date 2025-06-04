@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skinalyze Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <h2>Skinalyze</h2>
+                </div>
+            </div>
+
+            <div class="user-profile">
+                <div class="profile-pic">
+                    <!-- <img [src]="profileImageUrl || 'assets/images/ppic.jpeg'" alt="Profile Picture"> -->
+                    <img [src]="profileImageUrl" alt="Profile" width="120" height="120" class="rounded-circle">
+                    <div class="edit-overlay">
+                        <label for="fileInput">
+                            <i class="material-icons">edit</i>
+                        </label>
+                        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden />
+                    </div>
+                </div>
+                <h3 class="user-name">{{ userName }}</h3>
+                <p class="user-email">{{ userEmail }}</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <i class="material-icons">dashboard</i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/profile" routerLinkActive="active">
+                            <i class="material-icons">person</i>
+                            <span>Personal Information</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/upload-pic" routerLinkActive="active">
+                            <i class="material-icons">recommend</i>
+                            <span>Upload Picture</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/skin-recommendations" routerLinkActive="active">
+                            <i class="material-icons">recommend</i>
+                            <span>Recommendation System</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="#" routerLinkActive="active">
+                            <i class="material-icons">trending_up</i>
+                            <span>Progress Tracking</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/payment" routerLinkActive="active">
+                            <i class="material-icons">chat</i>
+                            <span>Chat Bot</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="/payment" routerLinkActive="active">
+                            <i class="material-icons">payment</i>
+                            <span>Payments</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a (click)="logout()" class="signout-btn">
+                    <i class="material-icons">logout</i>
+                    <span>Sign Out</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                    <p class="subtitle">Welcome back, {{userName}}! Here's an overview of your skincare journey.</p>
+                </div>
+                <div class="notification-profile">
+                    <div class="notification-bell">
+                        <i class="material-icons">notifications</i>
+                        <span class="notification-badge" *ngIf="notificationCount > 0">{{notificationCount}}</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview -->
+            <section class="dashboard-overview">
+                <div class="overview-grid">
+                    <div class="overview-card progress-card">
+                        <div class="card-icon">
+                            <i class="material-icons">timeline</i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Skin Health Score</h3>
+                            <div class="progress-container">
+                                <div class="progress-circle">
+                                    <svg viewBox="0 0 36 36" class="circular-chart">
+                                        <path class="circle-bg" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <path class="circle" [attr.stroke-dasharray]="skinHealthScore + ', 100'" d="M18 2.0845
+                        a 15.9155 15.9155 0 0 1 0 31.831
+                        a 15.9155 15.9155 0 0 1 0 -31.831" />
+                                        <text x="18" y="20.35" class="percentage">{{skinHealthScore}}%</text>
+                                    </svg>
+                                </div>
+                                <p class="progress-text">Your skin health is {{getSkinHealthStatus()}}.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card streak-card">
+                        <div class="card-icon">
+                            <i class="material-icons">local_fire_department</i>
+                        </div>
+                        <div class="card-content">
+
+                            <h3>Routine Streak</h3>
+                            <div class="streak-content">
+                                <div class="streak-count">{{routineStreak}}</div>
+                                <p>days in a row</p>
+                            </div>
+                            <div class="streak-calendar">
+                                <div *ngFor="let day of lastSevenDays" class="day"
+                                    [class.day-completed]="day.completed">
+                                    <span class="day-label">{{ day.label }}</span>
+                                    <i class="material-icons">
+                                        {{ day.completed ? 'check_circle' : 'radio_button_unchecked' }}
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-card product-card">
+                        <div class="card-icon">
+                            <i class="material-icons">spa</i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Product Usage</h3>
+                            <p class="product-count">{{activeProducts.length}} active products</p>
+                            <div class="product-list">
+                                <div *ngFor="let product of activeProducts.slice(0, 3)" class="product-item">
+                                    <div class="product-icon" [style.background-color]="product.color">
+                                        <i class="material-icons">{{product.icon}}</i>
+                                    </div>
+                                    <div class="product-info">
+                                        <h4>{{product.name}}</h4>
+                                        <p>{{product.category}}</p>
+                                    </div>
+                                </div>
+                                <a *ngIf="activeProducts.length > 3" class="view-all">View all {{activeProducts.length}}
+                                    products</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skin Insights -->
+            <section class="skin-insights">
+                <div class="section-header">
+                    <h2>Your Skin Insights</h2>
+                    <div class="timeframe-selector">
+                        <button (click)="changeTimeframe('week')"
+                            [class.active]="selectedTimeframe === 'week'">Week</button>
+                        <button (click)="changeTimeframe('month')"
+                            [class.active]="selectedTimeframe === 'month'">Month</button>
+                        <button (click)="changeTimeframe('year')"
+                            [class.active]="selectedTimeframe === 'year'">Year</button>
+                    </div>
+                </div>
+
+                <div class="insights-grid">
+                    <div class="insight-card analysis-chart">
+                        <h3>Skin Condition Trends</h3>
+                        <div class="chart-container">
+                            <!-- We would use a charting library like Chart.js or ngx-charts for a real implementation -->
+                            <div class="placeholder-chart">
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[7] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[6] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[5] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[4] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[3] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[2] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[1] * 0.4"></div>
+                                <div class="chart-line" [style.height.%]="40 + hydrationData[0] * 0.4"></div>
+                            </div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color hydration"></span>
+                                    <span>Hydration</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color elasticity"></span>
+                                    <span>Elasticity</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color evenness"></span>
+                                    <span>Evenness</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="insight-card routine-impact">
+                        <h3>Routine Impact</h3>
+                        <p>These products have the most positive impact on your skin:</p>
+                        <div class="impact-products">
+                            <div *ngFor="let product of topProducts" class="impact-product">
+                                <div class="impact-icon-container">
+                                    <div class="impact-icon" [style.background-color]="product.color">
+                                        <i class="material-icons">{{product.icon}}</i>
+                                    </div>
+                                    <div class="impact-percentage">+{{product.impact}}%</div>
+                                </div>
+                                <div class="impact-info">
+                                    <h4>{{product.name}}</h4>
+                                    <p>{{product.category}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommendations -->
+            <section class="recommendations">
+                <div class="section-header">
+                    <h2>Personalized Recommendations</h2>
+                    <a routerLink="#" class="view-all-link">View All</a>
+                </div>
+
+                <div class="recommendations-carousel">
+                    <div *ngFor="let recommendation of recommendations" class="recommendation-card">
+                        <div class="recommendation-image"
+                            [style.background-image]="'url(' + recommendation.image + ')'">
+                            <div class="recommendation-badge" *ngIf="recommendation.badge">{{recommendation.badge}}
+                            </div>
+                        </div>
+                        <div class="recommendation-content">
+                            <div class="recommendation-category">{{recommendation.category}}</div>
+                            <h3>{{recommendation.name}}</h3>
+                            <div class="recommendation-match">
+                                <span class="match-percentage">{{recommendation.matchPercentage}}% Match</span>
+                                <div class="match-bar">
+                                    <div class="match-progress" [style.width.%]="recommendation.matchPercentage"></div>
+                                </div>
+                            </div>
+                            <p class="recommendation-description">{{recommendation.description}}</p>
+                            <div class="recommendation-actions">
+                                <button class="view-details-btn">View Details</button>
+                                <button class="add-to-routine-btn">
+                                    <i class="material-icons">add</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Latest skin log entries -->
+            <section class="skin-logs">
+                <div class="section-header">
+                    <h2>Recent Skin Logs</h2>
+                    <button class="add-log-btn">
+                        <i class="material-icons">add</i>
+                        <span>New Log</span>
+                    </button>
+                </div>
+
+                <div class="logs-list">
+                    <div *ngFor="let log of recentLogs" class="log-card">
+                        <div class="log-header">
+                            <div class="log-date">
+                                <span class="day">{{log.date | date:'dd'}}</span>
+                                <span class="month">{{log.date | date:'MMM'}}</span>
+                            </div>
+                            <div class="log-rating">
+                                <i *ngFor="let star of [1,2,3,4,5]" class="material-icons">
+                                    {{star <= log.rating ? 'star' : 'star_border' }} </i>
+                            </div>
+                        </div>
+                        <div class="log-content">
+                            <h3>{{log.title}}</h3>
+                            <p>{{log.description}}</p>
+                        </div>
+                        <div class="log-tags">
+                            <span *ngFor="let tag of log.tags" class="log-tag">{{tag}}</span>
+                        </div>
+                        <div class="log-footer">
+                            <a routerLink="#" class="view-details">View Details</a>
+                            <div class="log-photos" *ngIf="log.photoCount > 0">
+                                <i class="material-icons">photo_library</i>
+                                <span>{{log.photoCount}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skinalyze Dashboard</title>
+    <link rel="stylesheet" href="profile-page.component.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="sidebar-header">
+            <div class="logo">
+              <h2>Skinalyze</h2>
+            </div>
+          </div>
+      
+          <div class="user-profile">
+            <div class="profile-pic">
+              <img [src]="profileImageUrl || 'assets/images/ppic.jpg'" alt="Profile Picture">
+              <div class="edit-overlay">
+                <label for="fileInput">
+                  <i class="material-icons">edit</i>
+                </label>
+                <input type="file" (change)="onFileSelected($event)" accept="image/*" id="fileInput" />
+              </div>
+            </div>
+            <h3 class="user-name">{{userName}}</h3>
+            <p class="user-email">{{userEmail}}</p>
+          </div>
+      
+          <nav class="sidebar-nav">
+            <ul>
+              <li>
+                <a href="#" class="active">
+                  <i class="material-icons">person</i>
+                  <span>Personal Information</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="/upload-pic" routerLinkActive="active">
+                <i class="material-icons">recommend</i>
+                <span>Upload Picture</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/skin-recommendations" routerLinkActive="active">
+                <i class="material-icons">recommend</i>
+                <span>Recommendation System</span>
+                </a>
+            </li>
+
+              <li>
+                <a href="#">
+                  <i class="material-icons">trending_up</i>
+                  <span>Progress Tracking</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="/chatbot">
+                  <i class="material-icons">chat</i>
+                  <span>Chat Bot</span>
+                </a>
+              </li>
+              <li>
+                <a routerLink="/payment">
+                  <i class="material-icons">payment</i>
+                  <span>Payments</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+      
+          <div class="sidebar-footer">
+            <a routerLink="/" class="signout-btn">
+              <i class="material-icons">logout</i>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </aside>
+      
+        <!-- Main Content -->
+        <main class="main-content">
+          <header class="content-header">
+            <div class="page-title">
+              <h1>Personal Information</h1>
+              <p class="subtitle">Manage your personal information, including contact details and preferences.</p>
+            </div>
+            <div class="header-actions">
+              <button class="edit-btn" (click)="openEditModal()">
+                <i class="material-icons">edit</i>
+                <span>Edit Profile</span>
+              </button>
+              <!-- New Change Password Button -->
+              <button class="change-password-btn" (click)="openChangePasswordModal()">
+                <i class="material-icons">lock</i>
+                <span>Change Password</span>
+              </button>
+            </div>
+          </header>
+      
+          <section class="info-summary">
+            <div class="info-card profile-overview">
+              <div class="card-header">
+                <h3>Profile Overview</h3>
+              </div>
+              <div class="card-body">
+                <div class="profile-stats">
+                  <div class="stat-item">
+                    <span class="stat-value">27</span>
+                    <span class="stat-label">Products Saved</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value">14</span>
+                    <span class="stat-label">Days Active</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="stat-value">3</span>
+                    <span class="stat-label">Skin Goals</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      
+          <!-- <section class="personal-details">
+            <h2 class="section-title">Personal Details</h2>
+            <div class="info-cards-grid">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">person</i>
+                </div>
+                <div class="info-details">
+                  <h4>Full Name</h4>
+                  <p>{{ userName }}</p>
+                </div>
+              </div> -->
+              <!-- <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">cake</i>
+                </div>
+                <div class="info-details">
+                  <h4>Date of Birth</h4>
+                  <p>21 January 2003</p>
+                </div>
+              </div> -->
+              <!-- <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">location_on</i>
+                </div> -->
+                <!-- <div class="info-details">
+                  <h4>Country/Region</h4>
+                  <p>Gujrat, Pakistan</p>
+                </div> -->
+              <!-- </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">language</i>
+                </div>
+                <div class="info-details">
+                  <h4>Language</h4>
+                  <p>English (UK)</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">email</i>
+                </div>
+                <div class="info-details">
+                  <h4>Email Address</h4>
+                  <p>{{ userEmail }}</p>
+                </div>
+              </div> -->
+              <!-- <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">phone</i>
+                </div> -->
+                <!-- <div class="info-details">
+                  <h4>Phone Number</h4>
+                  <p>+92 XXX XXX XXXX</p>
+                </div> -->
+              <!-- </div>
+            </div> -->
+          <!-- </section> -->
+
+        <!-- personal Detail section -->
+          <section class="personal-details">
+            <h2 class="section-title">Personal Details</h2>
+            <div class="info-cards-grid">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">person</i>
+                </div>
+                <div class="info-details">
+                  <h4>Full Name</h4>
+                  <p>{{ userName }}</p>
+                </div>
+              </div>
+          
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">language</i>
+                </div>
+                <div class="info-details">
+                  <h4>Language</h4>
+                  <p>English (UK)</p>
+                </div>
+              </div>
+          
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">email</i>
+                </div>
+                <div class="info-details">
+                  <h4>Email Address</h4>
+                  <p>{{ userEmail }}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+      
+          <section class="skin-profile">
+            <h2 class="section-title">Skin Profile</h2>
+            <div class="skin-profile-cards">
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">face</i>
+                </div>
+                <div class="info-details">
+                  <h4>Skin Type</h4>
+                  <p>{{ skinType }}</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">water_drop</i>
+                </div>
+                <div class="info-details">
+                  <h4>Concerns</h4>
+                  <p>{{ skinConcerns }}</p>
+                </div>
+              </div>
+              <div class="info-card">
+                <div class="info-icon">
+                  <i class="material-icons">wb_sunny</i>
+                </div>
+                <div class="info-details">
+                  <h4>Sensitivity</h4>
+                  <p>Moderate</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+      
+      <!-- Edit Profile Modal -->
+<!-- Edit Profile Modal -->
+<div *ngIf="showEditModal" class="modal" (click)="closeEditModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Edit Profile</h2>
+      <span class="close-modal" (click)="closeEditModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="profileForm">
+        <!-- Form fields for profile edit -->
+        <div class="form-group">
+          <label for="editName">Full Name</label>
+          <input type="text" id="editName" formControlName="fullName" class="form-input">
+        </div>
+        <!-- <div class="form-group">
+          <label for="editDob">Date of Birth</label>
+          <input type="date" id="editDob" formControlName="dateOfBirth" class="form-input">
+        </div> -->
+        <!-- <div class="form-group">
+          <label for="editLocation">Country/Region</label>
+          <input type="text" id="editLocation" formControlName="location" class="form-input">
+        </div> -->
+        <div class="form-group">
+          <label for="editLanguage">Language</label>
+          <select id="editLanguage" formControlName="language" class="form-input">
+            <option value="english_uk">English (UK)</option>
+            <option value="english_us">English (US)</option>
+            <option value="urdu">Urdu</option>
+            <option value="arabic">Arabic</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email Address (Non-editable)</label>
+          <input type="email" id="editEmail" formControlName="email" class="form-input" [disabled]="true" readonly>
+        </div>
+        <!-- <div class="form-group">
+          <label for="editPhone">Phone Number</label>
+          <input type="tel" id="editPhone" formControlName="phoneNumber" class="form-input">
+        </div> -->
+        <div class="form-group">
+          <label for="editSkinType">Skin Type</label>
+          <select id="editSkinType" formControlName="skinType" class="form-input">
+            <option value="combination">Combination</option>
+            <option value="oily">Oily</option>
+            <option value="dry">Dry</option>
+            <option value="normal">Normal</option>
+            <option value="sensitive">Sensitive</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Skin Concerns</label>
+          <div class="checkbox-group" formGroupName="skinConcerns">
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="acne"> Acne
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="hyperpigmentation"> Hyperpigmentation
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="wrinkles"> Wrinkles
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="dryness"> Dryness
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="redness"> Redness
+            </label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="editSensitivity">Sensitivity</label>
+          <select id="editSensitivity" formControlName="sensitivity" class="form-input">
+            <option value="low">Low</option>
+            <option value="moderate">Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeEditModal()">Cancel</button>
+      <button class="save-btn" [disabled]="profileForm.invalid" (click)="saveProfile()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+      
+      <!-- Change Password Modal -->
+<!-- Change Password Modal -->
+<div *ngIf="showChangePasswordModal" class="modal" (click)="closeChangePasswordModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Change Password</h2>
+      <span class="close-modal" (click)="closeChangePasswordModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="changePasswordForm" (ngSubmit)="submitChangePassword()">
+        <div class="form-group">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" id="currentPassword" formControlName="currentPassword" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="newPassword">New Password</label>
+          <input type="password" id="newPassword" formControlName="newPassword" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm New Password</label>
+          <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-input" required>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="cancel-btn" (click)="closeChangePasswordModal()">Cancel</button>
+          <button type="submit" class="save-btn" [disabled]="changePasswordForm.invalid">Change Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+
+</html>

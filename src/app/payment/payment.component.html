@@ -1,0 +1,63 @@
+<!-- 
+  <div class="payment-container">
+    <div class="payment-card">
+      <h2>Skinalyze Premium Access</h2>
+      <p class="price">
+        <span class="price-pkr">PKR 1,458.45</span><br />
+        <span class="price-usd">$5.00</span>
+      </p>
+      <ul class="features" style="list-style: none; padding: 0; text-align: center;">
+        <li style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <span style="color: #10B981; font-size: 20px; margin-right: 8px;">✔️</span> <span>Personalized skincare analysis</span>
+        </li>
+        <li style="display: flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+          <span style="color: #10B981; font-size: 20px; margin-right: 8px;">✔️</span> <span>Access to premium chatbot</span>
+        </li>
+        <li style="display: flex; align-items: center; justify-content: center;">
+          <span style="color: #10B981; font-size: 20px; margin-right: 8px;">✔️</span> <span>Progress tracking</span>
+        </li>
+      </ul>
+      <button (click)="pay()">Unlock Premium</button>
+    </div>
+  </div>
+  
+  
+   -->
+
+   <div class="payment-container">
+    <div class="payment-card">
+      <h2>Skinalyze Premium Plans</h2>
+  
+      <div class="plans">
+        <div class="plan" [class.selected]="selectedPlan === 'monthly'" (click)="selectPlan('monthly')">
+          <h3>Monthly</h3>
+          <p class="price-pkr">PKR 1,458.45</p>
+          <p class="price-usd">$5.00</p>
+        </div>
+  
+        <div class="plan" [class.selected]="selectedPlan === 'yearly'" (click)="selectPlan('yearly')">
+          <h3>Yearly</h3>
+          <p class="price-pkr">PKR 15,000.00</p>
+          <p class="price-usd">$50.00</p>
+        </div>
+      </div>
+  
+      <ul class="features">
+
+        <li>
+          <span class="check-icon">💬</span>
+          <strong>Access to Premium Chatbot</strong><br>
+          Ask questions, get tips, and track improvements 24/7.
+        </li>
+        <li>
+          <span class="check-icon">📈</span>
+          <strong>Progress Tracking</strong><br>
+          Monitor your skincare journey with visual reports.
+        </li>
+      </ul>
+      
+  
+      <button (click)="pay()">Premium Unlock</button>
+    </div>
+  </div>
+  

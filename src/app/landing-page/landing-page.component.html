@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skinalyze</title>
+    <link rel="stylesheet" href="landing-page.component.css"> <!-- Correct stylesheet -->
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <img src="assets/images/logo2.png">
+                <span>Skinalyze</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home" routerLink="/" routerLinkActive="active">Home</a></li>
+                    <li><a href="#what-we-offer" routerLinkActive="active">Features</a></li>
+                    <li><a href="#about-us" routerLinkActive="active">About</a></li>
+                    <li><a href="#contact-us" routerLinkActive="active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="account">
+                <a href="/sign-up" routerLink="/sign-up" routerLinkActive="active">Sign-Up</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Section -->
+    <main>
+        <section class="hero" id="home">
+            <div class="content">
+                <h1>Take Control Of Your Skin</h1>
+                <p>Discover personalized skincare solutions powered by AI. Analyze your skin type and get tailored
+                    recommendations for skincare routines and products designed to nourish, protect, and renew your
+                    skin.</p>
+
+                <button (click)="goToSignup()">Get Started</button>
+
+
+            </div>
+            <div class="images">
+                <div class="main-image">
+                    <img src="assets/images/landing page pic1.jpg" alt="Main Model">
+                </div>
+                <div class="secondary-image">
+                    <img src="assets/images/landing-page-pic-2.jpg" alt="Secondary Model">
+                    <span class="label">Beauty Product</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- What We Offer Section -->
+    <div class="eight_page" id="what-we-offer">
+        <h3 class="what_customer">What we offer</h3>
+        <div class="grey_boxes">
+            <div class="greybox">
+                <div class="greybox_header">
+                    <img src="assets/images/feature1.jpg" class="greybox_img">
+                    <div class="greybox_info">
+                        <p class="greybox_name">Progress Tracking</p>
+                        <p class="greybox_subheading">Your Journey</p>
+                    </div>
+                    <img src="assets/images/testimonial-icon.svg.svg" class="greybox_icon">
+                </div>
+                <p class="greybox_text">"Track Your Progress"</p>
+                <p class="greybox_lasttext">Our system ensures consistent monitoring of your skin's health by analyzing
+                    regular feedback and updates.
+                </p>
+            </div>
+            <div class="greybox">
+                <div class="greybox_header">
+                    <img src="assets/images/feature2.jfif" class="greybox_img">
+                    <div class="greybox_info">
+                        <p class="greybox_name">Skin Type Analysis</p>
+                        <p class="greybox_subheading">Personalized Insights</p>
+                    </div>
+                    <img src="assets/images/testimonial-icon.svg.svg" class="greybox_icon">
+                </div>
+                <p class="greybox_text">"Analyze Your Skin Type"</p>
+                <p class="greybox_lasttext"> Our advanced tools identify key characteristics, ensuring personalized
+                    skincare routines and product recommendations suited to your skin.
+                </p>
+            </div>
+            <div class="greybox">
+                <div class="greybox_header">
+                    <img src="assets/images/feature3.jfif" class="greybox_img">
+                    <div class="greybox_info">
+                        <p class="greybox_name">Skin Issue Analysis</p>
+                        <p class="greybox_subheading">Targeted Solutions</p>
+                    </div>
+                    <img src="assets/images/testimonial-icon.svg.svg" class="greybox_icon">
+                </div>
+                <p class="greybox_text">"Identify Skin Concerns"</p>
+                <p class="greybox_lasttext">We help you address concerns effectively by recommending targeted solutions
+                    for clearer and healthier skin with expert analysis.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <section class="about-us" id="about-us">
+        <div class="about-content">
+            <h1>About Us</h1>
+            <p>
+                At Skinalyze, we are dedicated to empowering individuals to achieve healthier, glowing skin. Using
+                AI-driven technology, we analyze your skin's unique needs and provide personalized recommendations.
+                Our mission is to revolutionize skincare by delivering science-backed insights that make a real
+                difference in your journey to better skin.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="assets/images/about-us.jpg" alt="About Us Illustration">
+        </div>
+    </section>
+
+
+    <!-- Contact Us Section -->
+    <section class="contact-us" id="contact-us">
+        <div class="contact-info">
+            <p class="help-text">How can we help you?</p>
+            <h1>Contact Us</h1>
+            <p class="description">
+                We’re here to help and answer any questions you might have.
+                We look forward to hearing from you!
+            </p>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <p>📞 +92 3079639338</p>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <p>✉️ <a href="mailto:mail&#64;skinalyze.com">skinalyze25&#64;gmail.com</a></p>
+                </div>
+            </div>
+            <a href="/sign-up" routerLink="/sign-up" routerLinkActive="active" class="contact-btn">Get in Touch</a>
+        </div>
+        <div class="illustration">
+            <img src="assets/images/illustration.png" alt="Illustration of a person waving hello">
+        </div>
+    </section>
+
+
+</body>
+
+</html>

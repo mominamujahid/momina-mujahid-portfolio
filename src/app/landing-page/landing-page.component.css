@@ -1,0 +1,773 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+}
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #fcf8f3, #e9d8cf) 
+}
+
+  
+/* Navbar Styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(117, 51, 62); /* Light beige background */
+  padding: 15px 50px; /* Adds padding for a spacious look */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  border-radius: 10px; /* Smooth rounded corners */
+}
+
+/* Logo Section */
+.logo {
+  display: flex; /* Align image and text horizontally */
+  align-items: center; /* Center image and text vertically */
+  font-size: 28px;
+  font-weight: 700;
+  color: rgb(245, 237, 238); /* Light color for elegance */
+  font-family: 'Poppins', sans-serif; /* Modern and clean font */
+  letter-spacing: 1px; /* Slight space between letters */
+  text-transform: uppercase; /* Make logo text stand out */
+  transition: color 0.3s ease-in-out;
+}
+
+.logo img {
+  width: 60px; /* Balanced size */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+/* Navbar Background & Styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensures everything is vertically centered */
+  background: linear-gradient(135deg, #7b3f58, #e9b0a2); /* Soft gradient for the background */
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(14, 13, 13, 0.1); /* Light shadow for depth */
+  border-radius: 10px; /* Rounded corners for the navbar */
+  position: sticky; /* Keeps navbar fixed at the top */
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top */
+}
+
+/* Navigation Links */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px; /* Adjust the spacing between the items */
+  margin: 0;
+  padding: 0;
+  align-items: center; /* Ensure vertical centering of links */
+}
+
+nav ul li {
+  position: relative; /* Enables hover effects */
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(245, 237, 238); /* Matches logo color */
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  padding: 8px 15px; /* Balanced padding around text */
+  line-height: 1.5; /* Ensures the items are aligned properly */
+  display: flex; /* Ensures the links are displayed as block */
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Center the text horizontally */
+}
+
+/* Hover Effect */
+nav ul li a:hover {
+  color: rgb(102, 81, 81); /* Soft pink on hover */
+  transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Underline Effect on Hover */
+nav ul li a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 3px;
+  background: rgb(228, 194, 194);
+  transition: width 0.3s ease-in-out;
+  margin-top: 5px;
+  border-radius: 5px; /* Rounded underline */
+}
+
+nav ul li a:hover::after {
+  width: 100%; /* Expanding underline effect */
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 20px;
+    background: linear-gradient(135deg, #7b3f58, #e9b0a2);
+    box-shadow: none; /* Remove shadow on mobile */
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  nav ul li a {
+    padding: 10px 20px;
+  }
+}
+
+/* Signup text design */
+.account a {
+  margin-left: 20px;
+  color: rgb(231, 226, 226);
+  text-decoration: none;
+  font-size: 1.3rem; /* Slightly larger for visibility */
+  font-weight: bold; /* Makes the text bold */
+  font-family: 'Poppins', sans-serif; /* Modern font */
+  text-transform: lowercase; /* Make everything lowercase */
+  letter-spacing: 1px; /* Adds spacing for elegance */
+  transition: all 0.3s ease-in-out; /* Smooth transition effect */
+  position: relative; /* Required for moving effect */
+}
+
+
+/* Stylish Hover Effect */
+.account a:hover {
+  color: rgb(102, 81, 81); /* Soft pink on hover */
+  transform: translateY(-3px); /* Slight upward movement */
+}
+
+/* No Underline Animation */
+.account a::after {
+  content: ""; 
+  display: none; /* Remove the underline by default */
+}
+
+
+
+  /* Hero Section */
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 101px;
+    max-height: 1000px;
+  }
+  
+  .content {
+    max-width: 50%;
+  }
+
+ /* "Take Control of Your Skin" Heading */
+.content h1 {
+  font-size: 64px; /* Keeps it bold and eye-catching */
+  font-weight: 700; /* Ensures strong emphasis */
+  font-family: 'Playfair Display', serif; /* Elegant and premium look */
+  color: rgb(117, 51, 62); /* Maintains your original color */
+  text-transform: uppercase; /* Makes it more impactful */
+  letter-spacing: 2px; /* Adds spacing for a refined feel */
+  text-align: left; /* Centers the text for a balanced layout */
+}
+/* Paragraph Styling for "Take Control of Your Skin" Section */
+.content p {
+  font-size: 20px; /* Slightly larger for better readability */
+  margin: 20px 0;
+  color: rgb(128, 42, 70); /* Keeps your original soft color */
+  font-family: 'Poppins', sans-serif; /* Modern and clean font */
+  line-height: 1.6; /* Improves spacing for a more elegant look */
+  text-align: left; /* Ensures a balanced, user-friendly layout */
+  max-width: 800px; /* Keeps text width optimal for readability */
+  margin-left: auto; /* Centers the paragraph */
+  margin-right: auto; /* Centers the paragraph */
+}
+/*get started */
+.content button {
+  background-color: rgb(170, 112, 122); /* Soft pinkish background */
+  color: white;
+  padding: 12px 25px; /* Adjusted padding for better button size */
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif; /* Smooth and modern font */
+  font-weight: 600;
+  border: none;
+  border-radius: 30px; /* Rounded button edges for a smoother look */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+}
+  
+  .content button:hover {
+    background-color: rgb(102, 81, 81);
+  }
+
+  /* Active Effect */
+.content button:active {
+  transform: translateY(2px); /* Button press effect */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Reduced shadow when clicked */
+}
+
+
+/*image section*/
+/* Hero Section */
+.hero .images {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 3rem; /* Spacing between images */
+  max-width: 90%;
+  margin: auto;
+  padding: 4rem 0; /* Adjust padding for top/bottom spacing */
+}
+
+/* Main Image Styling */
+.images .main-image {
+  width: 70%; /* Occupy most of the space */
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+}
+
+.images .main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Hover Effect for Main Image */
+.images .main-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3); /* Slight enlargement with stronger shadow */
+}
+
+/* Secondary Image Styling */
+.images .secondary-image {
+  position: absolute;
+  bottom: -50px; /* Positioned slightly below */
+  right: 0;
+  width: 25%; /* Smaller size */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  transition: transform 0.3s ease-in-out;
+}
+
+.images .secondary-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 4px solid white;
+}
+
+/* Hover Effect for Secondary Image */
+.images .secondary-image:hover {
+  transform: scale(1.1); /* Slight scale-up on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Beauty Product Text Styling */
+.images .secondary-image span {
+  position: absolute;
+  bottom: 15px; /* Positioned towards the bottom of the image */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.6); /* Dark background for text contrast */
+  padding: 8px 15px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  transition: opacity 0.3s ease;
+  opacity: 0; /* Hidden by default */
+}
+
+.images .secondary-image:hover span {
+  opacity: 1; /* Show text on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .images {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .images .main-image {
+    width: 80%;
+  }
+
+  .images .secondary-image {
+    bottom: -40px;
+    right: 0;
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .images .main-image,
+  .images .secondary-image {
+    width: 100%;
+  }
+
+  .images .secondary-image {
+    bottom: -30px;
+    right: 0;
+  }
+}
+
+
+
+
+
+
+
+  /* what we offer */
+/* Page Layout */
+.eight_page {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to right, #fcf8f3, #e9d8cf); /* Soft gradient */
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Heading Section - "What Customers Say" */
+.what_customer {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 800;
+  margin-top: 60px;
+  margin-bottom: 30px;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 4px; /* More spacing for luxury look */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Better shadow */
+  background: linear-gradient(45deg, #c0842f, #6a4f70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Grey Boxes Container - Flexbox for Staggered Layout */
+.grey_boxes {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 40px;
+  position: relative;
+}
+
+/* Individual Grey Box */
+.greybox {
+  background: rgba(255, 255, 255, 0.6); /* Glassmorphism effect */
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  width: 360px;
+  height: 400px;
+  padding: 25px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out; /* Staggered animation */
+}
+
+/* Remove staggered positioning for alignment */
+.greybox:nth-child(1),
+.greybox:nth-child(2),
+.greybox:nth-child(3) {
+  transform: translateY(0); /* Ensure all are at the same level */
+}
+
+
+/* Hover Effect */
+.greybox:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Quotation Mark Background */
+.greybox::before {
+  content: "“";
+  font-size: 80px;
+  color: rgba(106, 79, 112, 0.15);
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Grey Box Header */
+.greybox_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.greybox_img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #6a4f70;
+}
+
+.greybox_info {
+  flex-grow: 1;
+  padding-left: 15px;
+}
+
+.greybox_name {
+  font-weight: bold;
+  margin: 0;
+  font-size: 24px;
+  color: #6a4f70;
+  font-family: 'Poppins', sans-serif;
+}
+
+.greybox_subheading {
+  color: #444;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* Testimonial Text */
+.greybox_text {
+  font-family: 'Dancing Script', cursive;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #6a4f70;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Last Text in Grey Box */
+.greybox_lasttext {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Staggered Fade-in Animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Us Section */
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 80px 60px;
+  background: linear-gradient(to right, #fcf8f3, #e9d8cf);
+  border-radius: 12px;
+
+}
+
+/* About Us Content */
+.about-content {
+  max-width: 50%;
+}
+
+/* Elegant About Us Heading */
+.about-content h1 {
+  font-size: 3.5rem; /* Increased font size for more impact */
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  border-left: 5px solid #a84c73;
+  padding-left: 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px; /* More spacing for luxury look */
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Better shadow */
+  background: linear-gradient(45deg, #c0842f, #6a4f70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Modern Paragraph Styling without Box */
+.about-content p {
+  font-size: 1.5rem; /* Increased font size */
+  line-height: 1.8; /* Increased line height for readability */
+  margin-bottom: 30px; /* Adjusted spacing */
+  color: #4a4a4a; /* Slightly darker color for better contrast */
+  font-family: 'Lora', serif;
+  text-align: left; /* Changed text alignment for a cleaner look */
+  padding: 0; /* Removed padding to make it feel more integrated */
+  margin: 0; /* Removed margin to avoid extra space */
+  background: none; /* Removed background */
+  box-shadow: none; /* Removed box shadow */
+  max-width: 100%; /* Ensures the paragraph stretches across the available space */
+  word-wrap: break-word; /* Handles long words nicely */
+  display: block; /* Ensures paragraph is displayed as block level */
+}
+
+/* Learn More Button */
+.learn-more-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #8b3a62, #c56c91);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.learn-more-btn:hover {
+  background: linear-gradient(135deg, #7a3157, #b65a83);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* About Us Image */
+.about-image {
+  max-width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image Styling */
+.about-image img {
+  width: 320px;
+  height: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border: 4px solid #8b3a62;
+  transition: transform 0.3s ease-in-out;
+}
+
+.about-image img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .about-us {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 30px;
+  }
+
+  .about-content, .about-image {
+    max-width: 100%;
+  }
+
+  .about-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-content p {
+    font-size: 1.2rem;
+  }
+
+  .about-image img {
+    width: 280px;
+  }
+}
+
+
+
+
+/* Contact Us Section */
+.contact-us {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Keeps content & image side by side */
+  padding: 80px 60px;
+  background: linear-gradient(to right, #fcf8f3, #e9d8cf);
+  border-radius: 12px;
+  max-width: 1200px;
+  margin: 50px auto;
+  gap: 50px;
+}
+
+/* Left Side - Contact Info */
+.contact-info {
+  flex: 1;
+  text-align: left;
+}
+
+/* Small Help Text */
+.help-text {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #6a4f70;
+  margin-bottom: 10px;
+}
+
+/* Contact Us Heading */
+.contact-info h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  font-family: 'Playfair Display', serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(45deg, #c0842f, #6a4f70);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Description Text */
+.contact-info .description {
+  font-size: 1.3rem;
+  color: #333;
+  line-height: 1.6;
+  font-family: 'Lora', serif;
+  max-width: 90%;
+  margin-bottom: 30px;
+}
+
+/* Contact Details */
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Contact Item (Phone & Email) */
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #4a4a4a;
+  transition: transform 0.3s ease-in-out;
+}
+
+.contact-item i {
+  font-size: 1.6rem;
+  color: #8b3a62;
+}
+
+/* Hover Effect */
+.contact-item:hover {
+  transform: translateX(5px);
+  color: #c0842f;
+}
+
+/* Contact Email Link */
+.contact-item a {
+  text-decoration: none;
+  color: #8b3a62;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.contact-item a:hover {
+  color: #c0842f;
+}
+
+/* Contact Button */
+.contact-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 35px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(135deg, #8b3a62, #c56c91);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(135deg, #7a3157, #b65a83);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Side - Image */
+.illustration {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image Styling */
+.illustration img {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 3px solid #8b3a62;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect on Image */
+.illustration img:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contact-us {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 30px;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .contact-details {
+    align-items: center;
+  }
+
+  .illustration img {
+    width: 80%;
+    max-width: 350px;
+  }
+}
+
+
+
+
+

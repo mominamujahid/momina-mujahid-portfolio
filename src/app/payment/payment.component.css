@@ -1,0 +1,122 @@
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #f1ebea, #faf6f9); /* Softer pastel gradient */
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-card {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 20px; /* More rounded corners for a smoother look */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Softer, elegant shadow */
+  max-width: 650px; /* Increased width for a more spacious design */
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.3s ease; /* Add a subtle animation for zoom-in effect */
+}
+
+.payment-card:hover {
+  transform: scale(1.03); /* Slight zoom-in effect on hover */
+}
+
+.payment-card h2 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #6a4f70; /* Elegant muted color */
+  font-weight: 600;
+}
+
+.plans {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.plan {
+  flex: 1;
+  padding: 20px; /* Reduced padding for a smaller box */
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Softer shadow */
+  max-width: 270px; /* Set a max width to make it smaller */
+  margin: 0 auto; /* Center the box */
+}
+
+.plan:hover {
+  border-color: #c56c91;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow on hover */
+  transform: translateY(-5px); /* Slight lift effect */
+}
+
+.plan.selected {
+  border-color: #8b3a62;
+  background: linear-gradient(135deg, #f4e2ef, #f8d1e5); /* More delicate gradient */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow for selection */
+}
+
+.price-pkr {
+  font-size: 20px; /* Smaller font size for the price */
+  font-weight: bold;
+  color: #27ae60; /* Slightly softer green */
+}
+
+.price-usd {
+  font-size: 16px; /* Smaller font size for the USD price */
+  color: #7f8c8d; /* More muted color for USD */
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features li {
+  background: #f7f7f7;
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* Lighter shadow for subtlety */
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.check-icon {
+  font-size: 24px;
+  color: #28a745;
+}
+
+button {
+  display: block;
+  margin: 30px auto 0;
+  color: #fff;
+  background: linear-gradient(135deg, #8b3a62, #c56c91);
+  padding: 14px 35px;
+  border: none;
+  border-radius: 12px; /* Smoother rounded corners */
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+button:hover {
+  background: linear-gradient(135deg, #7a3157, #b65a83);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+button:focus {
+  outline: none; /* Remove focus outline */
+}

@@ -1,0 +1,225 @@
+/* General Styles */
+.signup-wrapper {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #fcf8f3, #e9d8cf);
+    overflow: hidden;
+    position: relative;
+    z-index: 0;
+}
+
+/* Large Decorative Circles */
+.signup-wrapper::before,
+.signup-wrapper::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.signup-wrapper::before {
+    width: 35vw;
+    height: 35vw;
+    background: #945d96;
+    top: -10vw; /* Adjusted for better visibility */
+    left: -10vw;
+}
+
+.signup-wrapper::after {
+    width: 35vw;
+    height: 35vw;
+    background: #613042;
+    bottom: -10vw; /* Adjusted for better visibility */
+    right: -10vw;
+}
+
+/* Signup Box */
+.signup-box {
+    width: 380px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Heading */
+.signup-box h2 {
+    background: linear-gradient(45deg, #c0842f, #6a4f70);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #8ecae6;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #005b96;
+    box-shadow: 0 0 8px rgba(0, 91, 150, 0.3);
+}
+
+/* Password Input and Eye Icon */
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 40px; /* Space for eye icon */
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s;
+}
+
+.eye-icon:hover {
+    color: #000;
+}
+
+.eye-icon i {
+    font-size: 1.2em;
+}
+
+/* Error Messages */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
+/* Notification System */
+.notification {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-align: center;
+    max-width: 350px;
+    margin: 10px auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.notification.error {
+    background-color: #ff6b6b;
+    color: white;
+    border-left: 6px solid #d9534f;
+}
+
+.notification.success {
+    background-color: #b375aa;
+    color: white;
+    border-left: 6px solid #f0cfe6;
+}
+
+/* Button */
+.signup-button {
+    color: #fff;
+    background: linear-gradient(135deg, #8b3a62, #c56c91);
+    padding: 12px;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.signup-button:hover {
+    background: linear-gradient(135deg, #361727, #b65a83);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.signup-button:disabled {
+    background: #5c3a52;
+    cursor: not-allowed;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .signup-box {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .signup-box h2 {
+        font-size: 2em;
+    }
+
+    .signup-wrapper::before {
+        width: 30vw;
+        height: 30vw;
+        bottom: -15vw;
+        right: -15vw;
+    }
+
+    .signup-wrapper::after {
+        width: 30vw;
+        height: 30vw;
+        bottom: -15vw;
+        right: -15vw;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .signup-box {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .signup-box h2 {
+        font-size: 1.8em;
+    }
+
+    .signup-wrapper::before {
+    width: 25vw;
+    height: 25vw;
+    top: -10vw;
+    left: -10vw;
+    }
+
+    .signup-wrapper::after {
+        width: 30vw;
+        height: 30vw;
+        bottom: -15vw;
+        right: -15vw;
+    }
+}

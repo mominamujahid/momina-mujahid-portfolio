@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Upload</title>
+</head>
+
+<body>
+  <div class="image-upload-container">
+    <!-- Header Section -->
+    <header class="page-header">
+      <div class="page-title">
+        <h1>Image Upload</h1>
+        <p class="subtitle">Upload a new image or capture one with your camera</p>
+      </div>
+      <div class="back-button">
+        <a routerLink="/dashboard">
+          <i class="material-icons">arrow_back</i>
+          <span>Back to Dashboard</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+      <!-- Image Preview Section -->
+      <div class="preview-section">
+        <div class="preview-container" [class.has-image]="imagePreview">
+          <div *ngIf="!imagePreview && !showCamera" class="placeholder">
+            <i class="material-icons">image</i>
+            <p>No image selected</p>
+          </div>
+          <img *ngIf="imagePreview && !showCamera" [src]="imagePreview" alt="Preview" class="image-preview">
+          <div *ngIf="showCamera" class="camera-container">
+            <video #videoElement autoplay playsinline class="camera-feed"></video>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls Section -->
+      <div class="controls-section">
+        <div class="upload-options">
+          <div class="option-card">
+            <div class="option-icon">
+              <i class="material-icons">file_upload</i>
+            </div>
+            <div class="option-content">
+              <h3>Upload from Device</h3>
+              <p>Select an image from your device to upload</p>
+              <button class="upload-btn" (click)="triggerFileInput()">
+                Select Image
+              </button>
+              <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden>
+            </div>
+          </div>
+
+          <div class="option-card">
+            <div class="option-icon">
+              <i class="material-icons">camera_alt</i>
+            </div>
+            <div class="option-content">
+              <h3>Use Camera</h3>
+              <p>Take a photo using your device's camera</p>
+              <button class="camera-btn" (click)="toggleCamera()">
+                {{ showCamera ? 'Hide Camera' : 'Open Camera' }}
+              </button>
+              <button *ngIf="cameraActive" class="capture-btn" (click)="captureImage()">
+                <i class="material-icons">photo_camera</i>
+                <span>Capture</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status and Action Buttons -->
+        <div class="action-section">
+          <div *ngIf="message" class="status-message" [style.color]="messageColor">
+            {{ message }}
+          </div>
+          <div class="action-buttons">
+            <button class="upload-action-btn" [disabled]="!selectedFile || loading" (click)="uploadImage()">
+              <i *ngIf="!loading" class="material-icons">cloud_upload</i>
+              <div *ngIf="loading" class="spinner"></div>
+              <span>{{ loading ? 'Uploading...' : 'Upload Image' }}</span>
+            </button>
+            <button class="cancel-btn" routerLink="/dashboard">
+              <span>Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Success Redirect Message -->
+      <div *ngIf="result" class="result-info-message">
+        <p>
+          Your results have been processed successfully.
+          Visit the <a routerLink="/profile" class="link">Profile</a> page to view your skin type and concerns, or head
+          to the
+          <a routerLink="/skin-recommendations" class="link">Recommendations</a> page to see personalized product suggestions.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

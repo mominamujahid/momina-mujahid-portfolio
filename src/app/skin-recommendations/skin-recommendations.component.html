@@ -1,0 +1,38 @@
+<div class="skin-recommendations-container">
+  <!-- Header Section -->
+  <header class="page-header">
+    <div class="page-title">
+      <h1>Skincare Recommendations</h1>
+      <p class="subtitle">Personalized product suggestions based on your skin profile</p>
+    </div>
+    <div class="back-button">
+      <a routerLink="/dashboard">
+        <i class="material-icons">arrow_back</i>
+        <span>Back to Dashboard</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Skin Profile Section -->
+  <div class="skin-profile-section">
+    <div class="profile-card">
+      <div class="card-header">
+        <i class="material-icons">face</i>
+        <h2>Your Skin Profile</h2>
+      </div>
+
+      <div class="profile-content">
+        <p><strong>Skin Type:</strong> {{ skinType }}</p>
+        <p><strong>Skin Issue:</strong> {{ skinConcern }}</p>
+
+        <div class="product-section">
+          <h3 class="product-title">Recommended Products:</h3>
+          <ul class="product-list">
+            <li *ngFor="let product of recommendedProductList">{{ product }}</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
