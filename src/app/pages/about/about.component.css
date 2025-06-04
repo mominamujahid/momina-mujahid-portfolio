@@ -1,0 +1,43 @@
+.about-section {
+  padding: 20px;
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #00bfff;
+    display: inline-block;
+  }
+
+  .about-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .about-img {
+    width: 250px;
+    border-radius: 10px;
+  }
+
+  .about-info {
+    flex: 1;
+
+    .description {
+      font-style: normal;
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+
+      p {
+        margin: 5px 0;
+      }
+    }
+
+    .bio {
+      margin-top: 20px;
+    }
+  }
+}

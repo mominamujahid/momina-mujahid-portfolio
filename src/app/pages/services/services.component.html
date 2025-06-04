@@ -1,0 +1,11 @@
+<div class="services-section">
+    <h2>Services</h2>
+    <p class="intro">What I offer to clients and businesses.</p>
+    <div class="grid">
+        <div class="service" *ngFor="let service of services">
+            <i class="fa fa-briefcase icon"></i>
+            <h3>{{service.title}}</h3>
+            <p>{{service.desc}}</p>
+        </div>
+    </div>
+</div>

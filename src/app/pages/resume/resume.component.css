@@ -1,0 +1,36 @@
+.resume-section {
+  padding: 40px;
+
+  h2 {
+    font-size: 32px;
+    border-bottom: 3px solid #00bfff;
+  }
+
+  .resume-columns {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+  }
+
+  .column {
+    flex: 1;
+
+    h4 {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    span {
+      font-size: 14px;
+      color: #666;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .italic {
+      font-style: normal ;
+    }
+  }
+}
