@@ -3,7 +3,7 @@
 **Manual QA Engineer · Angular Frontend Developer · UI/UX Designer**
 Islamabad, Pakistan
 
-I test software end to end, build the interfaces, and design the screens. I'm currently a QA Intern at CARE (Centre for Advanced Research in Engineering), testing the AppUstaad low-code platform.
+I test software end to end, build the interfaces, and design the screens. I'm currently a QA Research Assistant at CARE (Centre for Advanced Research in Engineering), testing the AppUstaad low-code platform.
 
 🌐 **Live portfolio:** https://mominamujahid.github.io/momina-mujahid-portfolio/
 🛒 **Live project:** [royalchilghoza.pk](https://royalchilghoza.pk/)
