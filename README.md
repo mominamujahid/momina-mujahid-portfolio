@@ -31,7 +31,7 @@ I test software end to end, build the interfaces, and design the screens. I'm cu
 
 ## Experience
 
-- **QA Intern** · CARE, Islamabad · Oct 2026 – present
+- **QA Research Assistant** · CARE, Islamabad · Oct 2026 – present
 - **Manual QA Engineer** · Reys Solutions, Gujrat · Jun – Dec 2025
 - **Development & Project Coordination Intern** · DigiBits · Jun – Sep 2024
 - **BS Computer Science** · University of Gujrat · 2021 – 2025
