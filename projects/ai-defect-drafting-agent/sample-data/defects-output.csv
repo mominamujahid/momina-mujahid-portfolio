@@ -1,0 +1,32 @@
+Bug ID,Date,Title,Module,Severity,Severity Reason,Priority,Environment,Preconditions,Steps to Reproduce,Expected Result,Actual Result,Error Details,Possible Area,Missing Info,Status
+BUG-261124-1204,2026-11-24,[Expense Claim] Submission fails when attaching a receipt,Expense Claim,High,,High,Staging,User is logged in and on the expense claim submission page. (assumed),"1. Navigate to the Expense Claim module. (assumed)
+2. Enter the required claim details. (assumed)
+3. Attach a receipt file.
+4. Click the submit button.",The claim should be submitted successfully with the attached receipt. (assumed),"The submission fails with a generic ""something went wrong"" message on the UI.","POST /api/claims 500 Internal Server Error: {""error"":""TypeError: Cannot read properties of undefined (reading 'size')""}",Backend/API: The 500 status code and TypeError regarding 'size' indicate the server is failing to process the uploaded file object.,"Specific file format used (e.g., PDF, PNG), file size, browser version, and user account role.",New
+BUG-261124-1206,2026-11-24,[Login] Login button is intermittently unresponsive on click,Login,High,,High,,User is on the login page with valid credentials.,"1. Open the login page (assumed).
+2. Enter valid username and password (assumed).
+3. Click the ""Login"" button.",The user should be successfully logged in and redirected to the application dashboard (assumed).,The login button is unresponsive and does nothing when clicked.,No error logs or API responses were provided.,Frontend - Likely a JavaScript issue where the click event is not firing or is being blocked by a UI state.,"1. Browser and OS version.
+2. Are there any errors in the browser console?
+3. Does this happen with specific accounts or all accounts?
+4. Frequency of occurrence (e.g., 1 out of 5 attempts).",New
+BUG-261124-1207,2026-11-24,[Dashboard] Total claims amount displays with duplicate decimals,Dashboard,Low,,Low,,The user account must have existing claims data to populate the dashboard (assumed).,"1. Log in to the application (assumed).
+2. Navigate to the Dashboard module (assumed).
+3. Observe the ""Total Claims Amount"" display.","Rs. 125,000.00 (assumed)","The total claims amount displays as ""Rs. 1,25,000.00.00"" with duplicate decimal suffixes.",N/A,Frontend - The currency formatting logic in the UI component is likely appending the decimal string twice.,"Browser version, account role, and whether this formatting error occurs for all currency values or only specific claim amounts.",New
+BUG-261124-121223,2026-11-24,[Expense Claim] Submission fails when a receipt is attached,Expense Claim,High (main feature broken; workaround: submit without receipt),,High,Staging,"1. User is logged into the application (assumed).
+2. User has the necessary permissions to create an expense claim (assumed).","1. (assumed) Navigate to the Expense Claim module.
+2. (assumed) Fill in all required fields for a new claim.
+3. Attach a receipt file to the claim.
+4. Attempt to submit the claim.",The expense claim is submitted successfully with the attached receipt (assumed).,"The submission fails and displays ""something went wrong"". This error only occurs when a receipt is attached; submission works correctly without a receipt.","POST /api/claims 500 Internal Server Error
+{""error"":""TypeError: Cannot read properties of undefined (reading 'size')"",""path"":""/api/claims"",""timestamp"":""2026-11-24T10:15:22Z""}","Backend/API - The server returns a 500 error with a TypeError when attempting to read the 'size' property, suggesting the attachment object is not being handled correctly in the code.","1. What was the file format (e.g., .pdf, .jpg) and size of the receipt used?
+2. Which browser and version were used during the test?
+3. What is the account role of the user?",New
+BUG-261124-121253,2026-11-24,[Login] Login button intermittently fails to respond,Login,High (main feature broken; users are intermittently blocked from accessing their accounts),,High,,(assumed) The user has a valid account and is on the login page.,"1. Navigate to the login page (assumed).
+2. Enter valid credentials (assumed).
+3. Click the login button.",(assumed) The user is successfully authenticated and redirected to the application dashboard.,The login button does nothing sometimes. There is no visual feedback or redirection when the issue occurs.,Not specified,Frontend (The button click event may not be firing correctly or is blocked by a UI state issue).,"Browser and OS versions; console logs (errors); network tab activity during the failure; specific user accounts affected; frequency of the issue (e.g., 3 out of 10 attempts).",New
+BUG-261124-121335,2026-11-24,[Dashboard] Total claims amount displays incorrect format and double decimals,Dashboard,Medium (Feature partly works; incorrect numeric formatting and display error).,,Medium,,User has existing claims data to be displayed on the dashboard (assumed).,"1. Log in to the application (assumed).
+2. Navigate to the Dashboard module (assumed).
+3. Observe the ""Total Claims"" amount field display.","Rs. 125,000.00","Rs. 1,25,000.00.00. Differences compared to expected: 1) It includes an additional comma (1,25,000 vs 125,000). 2) It appends an extra "".00"" decimal sequence at the end of the string.",Not specified,Frontend (Likely an issue with the UI's number-to-currency formatting function or double-binding of the decimal suffix).,1. Browser and OS version. 2. Does this occur for all currency values or only this specific amount? 3. Is the application set to a specific locale or language? 4. Specific user role or test data ID used.,New
+BUG-261124-122146,2026-11-24,[Login] Login button fails to respond intermittently,Login,High,"Login is a critical path for the application; if users cannot log in, they cannot access any features.",High,Not specified,"1. User is on the login page (assumed).
+2. User has a valid account (assumed).","1. Navigate to the login page (assumed).
+2. Enter username and password (assumed).
+3. Click the Login button.",The user is authenticated and redirected to the application (assumed).,"The login button does nothing. This behavior occurs intermittently (""sometimes"").",Not specified,Frontend - The button click event may not be firing or a script error is preventing the login request from being sent.,"Browser and version, device type (mobile or desktop), user credentials used, whether any errors appear in the browser console, and specific environment URL.",New

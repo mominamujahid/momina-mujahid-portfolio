@@ -51,6 +51,8 @@ I tested the agent with three different kinds of input ([`sample-data/test-bugs.
 
 *Rows 2–4: first run. Rows 5–7: after the prompt fixes. Row 8: final run with the separate Severity Reason column.*
 
+Full output of all seven reports: [`sample-data/defects-output.csv`](sample-data/defects-output.csv)
+
 ## What I learned
 
 - **Vague input is the real test.** The most useful output for the one-line login bug wasn't the steps (all assumed) but **Missing Info**: browser, console errors, affected accounts, how often it happens. Those are exactly the questions I'd ask before passing a bug to a developer.
