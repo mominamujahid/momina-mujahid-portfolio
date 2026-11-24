@@ -20,6 +20,7 @@ I test software end to end, build the interfaces, and design the screens. I'm cu
 | [`playwright-automation/`](playwright-automation) | Automated UI tests for an Expense Claim System: claim submission, API response check, search | Playwright, TypeScript |
 | [`angular-portfolio/`](angular-portfolio) | Earlier version of my portfolio, built as an Angular app with routed pages | Angular 17, TypeScript |
 | [`projects/ai-test-case-agent/`](projects/ai-test-case-agent) | No-code AI agent that turns user stories into positive, negative, boundary and edge-case test cases in Google Sheets | n8n, Google Gemini, Google Sheets |
+| [`projects/ai-defect-drafting-agent/`](projects/ai-defect-drafting-agent) | No-code AI agent that turns a messy bug description or error log into a structured defect report in Google Sheets | n8n, Google Gemini, Google Sheets |
 | [`projects/real-estate/`](projects/real-estate) | Real estate landing page built from a design | HTML, CSS |
 
 ## Skills

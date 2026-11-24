@@ -1,0 +1,376 @@
+{
+  "name": "AI Defect Drafting Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Report a Bug",
+        "formDescription": "Paste what happened. The AI will draft a structured bug report.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Module"
+            },
+            {
+              "fieldLabel": "Environment",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Staging"
+                  },
+                  {
+                    "option": "Production"
+                  },
+                  {
+                    "option": "Local"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "What happened",
+              "fieldType": "textarea",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Expected behaviour",
+              "fieldType": "textarea"
+            },
+            {
+              "fieldLabel": "Error log or API response",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        0
+      ],
+      "id": "8bb346b6-85f1-44f8-a790-a820973ee58d",
+      "name": "On form submission"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Module: {{ $json[\"Module\"] }}\nEnvironment: {{ $json[\"Environment\"] }}\nWhat happened: {{ $json[\"What happened\"] }}\nExpected behaviour: {{ $json[\"Expected behaviour\"] }}\nError log or API response: {{ $json[\"Error log or API response\"] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a senior QA engineer. Turn the raw bug information into one clear, professional defect report.\nRules:\n\nTitle format: “[Module] What fails + when”, under 12 words.\nSteps to reproduce: numbered, one action per step. If a step is not given in the input, mark it “(assumed)”.\nNever invent error messages, data or behaviour that is not in the input.\nExpected result: use the input. If none is given, use the obvious correct behaviour and mark it “(assumed)”.\nActual result: exactly what went wrong, quoting the key error message if there is one.\nError details: the most important lines from the log or API response (status code, error message), not the whole log.\nSeverity: Critical (crash, data loss, security issue, no workaround), High (main feature broken), Medium (feature partly works or has a workaround), Low (cosmetic or text issue).\nPriority: High, Medium or Low, based on user impact.\nPossible area: Frontend, Backend/API, Database, Integration, or Unknown, with one short reason.\nMissing info: questions a developer would ask that the input doesn’t answer (browser, test data, account role, etc.). Write “None” if nothing is missing.\nAll fields must be plain text. \nExtra rules:\n\nKeep every clue from the input in the report: workarounds (“works without X”), frequency (“sometimes”, “only on mobile”) and conditions. Put them in Actual Result.\nOnly mark something “(assumed)” if it is NOT in the input. If the user gave the expected behaviour, do not mark it assumed. Preconditions follow the same rule.\nWhen expected and actual values are given, compare them character by character and list EVERY difference.\nIf a field has no information, write “Not specified”. Never leave it blank.\nSeverity: one word only (Critical / High / Medium / Low). Put the reason in severity_reason."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        192,
+        0
+      ],
+      "id": "77da0bd7-a172-4609-8bef-feaff5300aba",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        208
+      ],
+      "id": "e5a5ec2b-e142-4654-8029-1d615746e5be",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"title\": \"[Expense Claim] Submit fails with 500 error when receipt is attached\",\n  \"module\": \"Expense Claim\",\n  \"severity\": \"High\",\n  \"priority\": \"High\",\n  \"environment\": \"Staging\",\n  \"preconditions\": \"User is logged in as an employee\",\n  \"steps_to_reproduce\": \"1. Open New Claim 2. Fill all fields 3. Attach a PDF receipt 4. Click Submit\",\n  \"expected_result\": \"Claim is submitted and appears in My Claims\",\n  \"actual_result\": \"Error toast 'Something went wrong'; claim not saved\",\n  \"error_details\": \"POST /api/claims returned 500: 'Cannot read properties of undefined (reading size)'\",\n  \"possible_area\": \"Backend/API - server fails while handling the file upload\",\n  \"severity_reason\": \"Main feature broken; workaround: submit without receipt\",\n  \"missing_info\": \"Does it happen with JPG files? What is the file size?\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        384,
+        208
+      ],
+      "id": "ae3949ca-6f3b-4164-8fd8-784d79422a32",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Defects",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Title": "={{ $json.output.title }}",
+            "Module": "={{ $json.output.module }}",
+            "Severity": "={{ $json.output.severity }}",
+            "Priority": "={{ $json.output.priority }}",
+            "Environment": "={{ $json.output.environment || 'Not specified' }}",
+            "Preconditions": "={{ $json.output.preconditions }}",
+            "Steps to Reproduce": "={{ $json.output.steps_to_reproduce }}",
+            "Expected Result": "={{ $json.output.expected_result }}",
+            "Bug ID": "={{ 'BUG-' + $now.toFormat('yyMMdd-HHmmss') }}",
+            "Actual Result": "={{ $json.output.actual_result }}",
+            "Error Details": "={{ $json.output.error_details }}",
+            "Possible Area": "={{ $json.output.possible_area }}",
+            "Missing Info": "={{ $json.output.missing_info }}",
+            "Status": "New",
+            "Date": "={{ $now.toFormat('yyyy-MM-dd') }}",
+            "Severity Reason": "={{ $json.output.severity_reason }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Bug ID",
+              "displayName": "Bug ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date",
+              "displayName": "Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Module",
+              "displayName": "Module",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Severity",
+              "displayName": "Severity",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Severity Reason",
+              "displayName": "Severity Reason",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Environment",
+              "displayName": "Environment",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Preconditions",
+              "displayName": "Preconditions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Steps to Reproduce",
+              "displayName": "Steps to Reproduce",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Expected Result",
+              "displayName": "Expected Result",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Actual Result",
+              "displayName": "Actual Result",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Error Details",
+              "displayName": "Error Details",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Possible Area",
+              "displayName": "Possible Area",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Missing Info",
+              "displayName": "Missing Info",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        560,
+        0
+      ],
+      "id": "b0b544f7-e70f-4702-9562-ac96333f97d4",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
