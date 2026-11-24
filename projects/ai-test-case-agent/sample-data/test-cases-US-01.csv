@@ -1,0 +1,32 @@
+Story ID,TC ID,Title,Type,Preconditions,Steps,Expected Result,Priority
+US-01,TC-01,Successful password reset with minimum valid length (8 characters),Positive,User has a registered account with email 'user@example.com'.,"1. Navigate to the Forgot Password page.
+2. Enter 'user@example.com' and click 'Send'.
+3. Open the reset link from the received email.
+4. Enter 'NewPass1' (8 characters, 1 number) as the new password.
+5. Click 'Reset Password'.",System confirms email sent; User receives email; New password is accepted; User can log in with new credentials.,High
+US-01,TC-02,Successful password reset with maximum valid length (20 characters),Boundary,User has a registered account and has received a valid reset link via email.,"1. Open the reset link from the email.
+2. Enter 'A1bcdefghijlkmnopqrs' (20 characters, includes numbers).
+3. Click 'Reset Password'.",System confirms password change; Password 'A1' followed by 18 characters is accepted.,Medium
+US-01,TC-03,Password reset fails if password is less than 8 characters,Negative,User has a registered account and has received a valid reset link via email.,"1. Open the reset link from the email.
+2. Enter 'Passw1' (6 characters).
+3. Click 'Reset Password'.",System displays an error message stating the password must be at least 8 characters long.,High
+US-01,TC-04,Password reset fails if password is more than 20 characters,Negative,User has a registered account and has received a valid reset link via email.,"1. Open the reset link from the email.
+2. Enter 'PasswordLongerThan20Chars1' (26 characters).
+3. Click 'Reset Password'.",System displays an error message stating the password cannot exceed 20 characters.,Medium
+US-01,TC-05,Password reset fails if password contains no numbers,Negative,User has a registered account and has received a valid reset link via email.,"1. Open the reset link from the email.
+2. Enter 'PasswordNoNum' (13 characters, no numbers).
+3. Click 'Reset Password'.",System displays an error message stating the password must contain at least one number.,High
+US-01,TC-06,Reset link expires after 30 minutes,Boundary,User has a registered account and requested a reset link.,"1. Request a password reset link.
+2. Wait for 31 minutes without clicking the link.
+3. Click the link in the email.",System displays an error message: 'The reset link has expired.',High
+US-01,TC-07,Password reset request with unregistered email address,Negative,User is on the Forgot Password page. 'nonexistent@example.com' is not in the database.,"1. Enter 'nonexistent@example.com' in the email field.
+2. Click 'Send Link'.
+3. Check inbox of 'nonexistent@example.com'.","System displays a message (e.g., 'If your email is in our system, you will receive a link') and no email is sent to the provided address.",Medium
+US-01,TC-08,Reset link cannot be reused after successful password change,Edge,User has already successfully reset their password using Link A.,"1. Attempt to click Link A again from the email.
+2. Attempt to provide a new password and submit.",System displays an error message: 'This link has already been used.',High
+US-01,TC-09,Password with mixed characters (uppercase/special) and numbers is accepted,Positive,User has a registered account and a valid reset link.,"1. Open the reset link from the email.
+2. Enter 'Password123!' (contains uppercase, lowercase, numbers, and symbols).
+3. Click 'Reset Password'.",Password is successfully reset; 'Password123!' is accepted.,Medium
+US-01,TC-10,Reset link is still valid just before 30-minute expiration,Boundary,User has a registered account and requested a reset link.,"1. Request a password reset link.
+2. Wait for 29 minutes.
+3. Click the link in the email.",Link is still active; password reset form is displayed.,Medium
