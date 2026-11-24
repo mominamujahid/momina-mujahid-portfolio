@@ -1,0 +1,298 @@
+{
+  "name": "AI Test Case Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Stories",
+          "mode": "name"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -512,
+        16
+      ],
+      "id": "1739a3ab-8634-4f1c-b454-0e75a26facfc",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Story ID: {{ $json[\"Story ID\"] }}\nUser Story: {{ $json[\"User Story\"] }}\nAcceptance Criteria: {{ $json[\"Acceptance Criteria\"] }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a senior QA engineer. From the user story and acceptance criteria given, write clear, practical test cases. Include positive, negative, boundary and edge-case scenarios. Each test case must have: story_id, tc_id (TC-01, TC-02...), title, type (Positive / Negative / Boundary / Edge), preconditions, steps (numbered), expected_result, and priority (High / Medium / Low). Write 8–15 test cases. Do not invent features that are not in the story. Also list any unclear or missing acceptance criteria as open_questions."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -288,
+        16
+      ],
+      "id": "f00b0654-da82-4c35-b7cd-360c8bb1a938",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        -400,
+        320
+      ],
+      "id": "d2466717-5aa7-48c1-9da1-2f5d7d44b2d6",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"test_cases\": [\n    {\n      \"story_id\": \"US-01\",\n      \"tc_id\": \"TC-01\",\n      \"title\": \"Login with valid credentials\",\n      \"type\": \"Positive\",\n      \"preconditions\": \"User has a registered account\",\n      \"steps\": \"1. Open login page 2. Enter valid email and password 3. Click Login\",\n      \"expected_result\": \"User is redirected to dashboard\",\n      \"priority\": \"High\"\n    }\n  ],\n  \"open_questions\": [\"What happens after 5 failed attempts?\"]\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        224
+      ],
+      "id": "491db0f0-eff2-4440-b5dd-adb0e27b5432",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "output.test_cases",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        16
+      ],
+      "id": "15b2daf8-dcf2-455c-b1e8-134f09683fc7",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "",
+          "mode": "list"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "TestCases",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Story ID": "={{ $json.story_id }}",
+            "TC ID": "={{ $json.tc_id }}",
+            "Title": "={{ $json.title }}",
+            "Type": "={{ $json.type }}",
+            "Preconditions": "={{ $json.preconditions }}",
+            "Steps": "={{ $json.steps }}",
+            "Expected Result": "={{ $json.expected_result }}",
+            "Priority": "={{ $json.priority }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Story ID",
+              "displayName": "Story ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "TC ID",
+              "displayName": "TC ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Title",
+              "displayName": "Title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Type",
+              "displayName": "Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Preconditions",
+              "displayName": "Preconditions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Steps",
+              "displayName": "Steps",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Expected Result",
+              "displayName": "Expected Result",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Priority",
+              "displayName": "Priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        304,
+        16
+      ],
+      "id": "f6144161-0933-49af-a21f-c28abc3c94c7",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "nodeGroups": [],
+  "tags": []
+}
